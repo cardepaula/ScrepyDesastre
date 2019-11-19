@@ -6,15 +6,17 @@ class SaudemgSpider(scrapy.Spider):
     allowed_domains = ['saude.mg.gov.br']
     start_urls = ['http://saude.mg.gov.br/component/search/?all=desastre+mariana&exact=&any=&none=&created=&modified=&area=all']
 
-    '''def start_requests(self):
+    def start_requests(self):
         urls = [
             'http://saude.mg.gov.br/component/search/?all=desastre+mariana&exact=&any=&none=&created=&modified=&area=all'
         ]
+
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)'''
+            yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        for card in response.css('div.card.masonry-brick'):
+
+        for card in response.css('card.masonry-brick'):
             yield response.follow(card, self.parse_article)
 
     def parse_article(self, response):
@@ -25,5 +27,4 @@ class SaudemgSpider(scrapy.Spider):
         text = ""
 
         item = SigdesastrescrapyItem(link=link, author=author, title=title, text=text)
-
         yield item

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from scrapy.exporters import JsonItemExporter
+import json
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -7,6 +7,14 @@ from scrapy.exporters import JsonItemExporter
 
 
 class SigdesastrescrapyPipeline(object):
-    def process_item(self, item, spider):
 
+    def open_spider(self, spider):
+        self.file = open('./items.json', 'w')
+
+    def close_spider(self, spider):
+        self.file.close()
+
+    def process_item(self, item, spider):
+        line = json.dumps(dict(item)) + "\n"
+        self.file.write(line)
         return item
