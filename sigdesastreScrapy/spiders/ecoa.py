@@ -2,21 +2,18 @@ import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
 
 
-class SaudemgSpider(scrapy.Spider):
-    name = "saudemg"
-    allowed_domains = ['saude.mg.gov.br']
-    start_urls = ['http://saude.mg.gov.br/component/search/?all=desastre+mariana&exact=&any=&none=&created=&modified=&area=all',
-                  'http://saude.mg.gov.br/component/search/?all=rompimento%20barragem&exact=&any=&none=&created=&modified=&from=40&area=stories',
-                  'http://saude.mg.gov.br/component/search/?all=rompimento%20barragem&exact=&any=&none=&created=&modified=&from=0&area=stories']
+class EcoaSpider(scrapy.Spider):
+    name = "ecoa"
+    allowed_domains = ['ecoa.org.br']
+    start_urls = ['https://ecoa.org.br/?s=desastre+mariana']
 
     def parse(self, response):
-        for quote in response.css('div.card'):
-
+        for quote in response.css('a.m-miniatura.foto-internas.grid'):
             yield {
-                'link': self.parselink(quote.css('h2.title a ::attr(href)').extract_first()) ,
-                'descricao': quote.css('div.description p ::text').extract_first(),
+                'link': self.parselink(quote.css('a.m-miniatura.foto-internas.grid ::attr(href)').extract_first()) ,
+                'descricao': quote.css('span.m-miniatura__resumo p ::text').extract_first(),
                 'dataPublicacao': self.dateparse(quote.css('span.date ::text').extract_first()) ,
-                'titulo': quote.css('h2.title a ::text').extract_first(),
+                'titulo': quote.css('h1.m-miniatura__titulo::text').extract_first(),
                 'conteudo': self.createconteudo(),
                 'dataCriacao': self.dateparse(quote.css('span.date ::text').extract_first()),
                 'dataAtualizacao': self.dateparse(quote.css('span.date ::text').extract_first()),
