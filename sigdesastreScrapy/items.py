@@ -10,6 +10,6 @@ import scrapy
 
 class SigdesastrescrapyItem(scrapy.Item):
     link = scrapy.Field()
-    author = scrapy.Field()
+    data = scrapy.Field()
     title = scrapy.Field()
     text = scrapy.Field()
