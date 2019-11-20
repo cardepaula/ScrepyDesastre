@@ -10,7 +10,13 @@ class SaudemgSpider(scrapy.Spider):
         for quote in response.css('div.card'):
             yield {
                 'link': quote.css('h2.title a ::attr(href)').extract_first(),
-                'text': quote.css('div.description::text').extract_first(),
-                'data': quote.css('span.date ::text').extract_first(),
-                'title': quote.css('h2.title a ::text').extract_first()
+                'descricao': quote.css('div.description::text').extract_first(),
+                'dataPublicacao': quote.css('span.date ::text').extract_first(),
+                'titulo': quote.css('h2.title a ::text').extract_first()
+                'conteudo':''
             }
+
+    def dateparse(self,data):
+        data.split()
+
+        return data
