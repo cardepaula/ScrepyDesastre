@@ -10,6 +10,13 @@ import scrapy
 
 class SigdesastrescrapyItem(scrapy.Item):
     link = scrapy.Field()
-    data = scrapy.Field()
-    title = scrapy.Field()
-    text = scrapy.Field()
+    descricao = scrapy.Field()
+    dataPublicacao = scrapy.Field()
+    titulo = scrapy.Field()
+    conteudo = scrapy.Field()
+    dataCriacao = scrapy.Field()
+    dataAtualizacao = scrapy.Field()
+    fonte = scrapy.Field()
+    midias = scrapy.Field()
+    grupoAcesso = scrapy.Field()
+    descritores = scrapy.Field()

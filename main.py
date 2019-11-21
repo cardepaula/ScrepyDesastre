@@ -15,8 +15,7 @@ def main():
     # links = title.find_all('a').get('href')
     file = open('noticias.txt', 'w')
     for i in title:
-        line = json.dumps(dict(i))
-        file.write(line)
+        file.write(str(i)+'\n')
     file.close()
     # for j in range(len(title)):
     #     dicio = {

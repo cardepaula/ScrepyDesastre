@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import requests
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -8,13 +9,9 @@ import json
 
 class SigdesastrescrapyPipeline(object):
 
-    def open_spider(self,spider):
-        self.file= open('noticias.txt','w')
-
     def process_item(self, item, spider):
-        line = json.dumps(dict(item)) + '\n'
-        self.file.write(line)
-        return item
+        url = 'https://sigdesastre.herokuapp.com/noticias'
+        headers = {'content-type': 'application/json'}
+        x = requests.post(url, data=json.dumps(item), headers=headers)
 
-    def close_spider(self,spider):
-        self.file.close()
+
