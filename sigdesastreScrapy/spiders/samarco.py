@@ -5,20 +5,20 @@ import datetime
 
 
 class EcoaSpider(scrapy.Spider):
-    name = "ecoa"
-    allowed_domains = ['ecoa.org.br']
-    start_urls = ['https://ecoa.org.br/?s=desastre+mariana']
+    name = "samarco"
+    allowed_domains = ['samarco.com']
+    start_urls = ['https://www.samarco.com/?s=desastre+mariana']
 
     def parse(self, response):
-        for quote in response.css('a.m-miniatura.foto-internas.grid'):
+        for quote in response.css('div.noticia-box'):
             yield {
-                'link': self.parselink(quote.css('a.m-miniatura.foto-internas.grid ::attr(href)').extract_first()) ,
-                'descricao': quote.css('span.m-miniatura__resumo p ::text').extract_first(),
-                'dataPublicacao': self.dateparse() ,
-                'titulo': quote.css('h1.m-miniatura__titulo::text').extract_first(),
+                'link': (quote.css('a.noticia-titulo::attr(href)').extract_first()) ,
+                'descricao': quote.css('a.noticia-titulo::text').extract_first(),
+                'dataPublicacao': self.dateparse(quote.css('p.noticia-data::text').extract_first()) ,
+                'titulo': quote.css('a.noticia-titulo::text').extract_first(),
                 'conteudo': self.createconteudo(),
-                'dataCriacao': self.dateparse(),
-                'dataAtualizacao': self.dateparse(),
+                'dataCriacao': self.dateparse(quote.css('p.noticia-data::text').extract_first()),
+                'dataAtualizacao': self.dateparse(quote.css('p.noticia-data::text').extract_first()),
                 'fonte':self.createfonte(),
                 'midias': [],
                 'grupoAcesso': self.createGrupoAcesso(),
@@ -26,8 +26,9 @@ class EcoaSpider(scrapy.Spider):
             }
 
 
-    def dateparse(self):
-        return datetime.datetime.now().strftime("%d-%m-%Y")
+    def dateparse(self,data):
+        d = data.split()
+        return "%s-%s-%s"%(d[0],d[1],d[2])
 
     def parselink(self,link):
         if link[0] != 'h':

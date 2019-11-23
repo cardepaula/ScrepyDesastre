@@ -9,9 +9,9 @@ import requests
 
 class SigdesastrescrapyPipeline(object):
 
-    def process_item(self, item, spider):
-        url = 'https://sigdesastre.herokuapp.com/noticias'
-        headers = {'content-type': 'application/json'}
-        x = requests.post(url, data=json.dumps(item), headers=headers)
+    # def process_item(self, item, spider):
+    #     url = 'https://sigdesastre.herokuapp.com/noticias'
+    #     headers = {'content-type': 'application/json'}
+    #     x = requests.post(url, data=json.dumps(item), headers=headers)
 
 
