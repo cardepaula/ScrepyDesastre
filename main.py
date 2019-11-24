@@ -1,31 +1,62 @@
 from bs4 import BeautifulSoup as bs
-import requests
-import json
+# import requests
+import json, glob, sys
+from requestx.RequestX import RequestX
+PATH = "./out/"
+
+
+
+
+def list_files():
+    files = []
+    try:
+        files_path = glob.glob(PATH + "*.json")
+        files_path.sort()
+        for f in files_path:
+            if sys.platform == "win32":
+                files.append(f.split("\\")[-1])
+            else:
+                files.append(f.split("/")[-1])
+        return files
+    except Exception as err:
+        print(err)
+        return []
+
+def ehvalido(objeto):
+    palavas = ['mariana','desastre','vale','ambieltal','tragedia']
+
+    for i in palavas:
+        if i in objeto['descricao'].lower():
+            return True
+        if i in objeto['titulo'].lower():
+            return True
+
+    return False
+
 
 def main():
-    dados = []
+    list_of_files = []
+    list_of_files = list_files()
+    request = RequestX()
+    for file in list_of_files:
+        with open(PATH+file) as json_file:
+            try:
+                data = json.load(json_file)
+            except:
+                data = []
+                print("erro ao carregar json")
+            print(file)
+            for objeto in data:
+                response = ""
+                try:
+                    response = request.post(objeto, "https://sigdesastre.herokuapp.com/noticias")
+                    print("Valido:")
+                    print(response)
+                except:
+                    print ('Algo deu errado')
+                    print(response)
 
-    page = requests.get("http://www.mpf.mp.br/atuacao-tematica/ccr4/@@updated_search?path=&b_start:int=0&SearchableText=desastre%20mariana")
-    soup = bs(page.content, "html.parser")
 
 
-    title = soup.find_all("a", class_="state-published")
-    text = soup.find_all("div", class_="highlightedSearchTerm")
-
-    # links = title.find_all('a').get('href')
-    file = open('noticias.txt', 'w')
-    for i in title:
-        file.write(str(i)+'\n')
-    file.close()
-    # for j in range(len(title)):
-    #     dicio = {
-    #         "local": link[j].get_text(),
-    #         "text": text[j].get_text(),
-    #         "data": data[j].get_text(),
-    #         "title": title[j].get_text()
-    #     }
-    #     dados.append(dicio)
-    #
-    # print(dados)
 
 main()

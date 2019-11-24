@@ -27,23 +27,23 @@ class EcoaSpider(scrapy.Spider):
 
 
     def dateparse(self,data):
-        d = data.split()
+        d = data.split('/')
         return "%s-%s-%s"%(d[0],d[1],d[2])
 
     def parselink(self,link):
         if link[0] != 'h':
-            return 'https://ecoa.org.br/' + link
+            return 'https://www.samarco.com/' + link
         else: return link
 
     def createconteudo(self):
         return None
     def createfonte(self):
-        return { 'nome': 'ecoa',
-            'link': 'https://ecoa.org.br',
-            'descricao': 'Ecoa – Ecologia e Ação de Campo Grande, capital de Mato Grosso do Sul.',
+        return { 'nome': 'samarco',
+            'link': 'https://www.samarco.com/',
+            'descricao': 'Samarco é uma empresa de capital fechado que atua no segmento de mineração.',
             'tipoFonte': {
-            'id': 3,
-            'nome': 'Associações e Movimentos'
+            'id': 6,
+            'nome': 'Iniciativa Privada'
             } }
     def createGrupoAcesso(self):
         return { 'id': 1, 'nome': 'todos',}

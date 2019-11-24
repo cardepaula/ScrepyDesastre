@@ -6,14 +6,7 @@ from sigdesastreScrapy.items import SigdesastrescrapyItem
 class organonSpider(scrapy.Spider):
     name = "organon"
     allowed_domains = ['organon.ufes.br']
-    start_urls = ['http://organon.ufes.br/noticias/?pag=1',
-                  'http://organon.ufes.br/noticias/?pag=2',
-                  'http://organon.ufes.br/noticias/?pag=3',
-                  'http://organon.ufes.br/noticias/?pag=4',
-                  'http://organon.ufes.br/noticias/?pag=5',
-                  'http://organon.ufes.br/noticias/?pag=6',
-                  'http://organon.ufes.br/noticias/?pag=7',
-                  'http://organon.ufes.br/noticias/?pag=8']
+    start_urls = ['http://organon.ufes.br/noticias/?pag=1',] #1 até 8
 
     def parse(self, response):
         for quote in response.css('div a.opiniao'):
