@@ -27,7 +27,7 @@ class EcoaSpider(scrapy.Spider):
 
 
     def dateparse(self):
-        return datetime.datetime.now().strftime("%d-%m-%Y")
+        return datetime.datetime.now().strftime("%Y-%m-%d")
 
     def parselink(self,link):
         if link[0] != 'h':
