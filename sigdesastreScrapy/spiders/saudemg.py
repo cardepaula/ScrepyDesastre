@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
 
