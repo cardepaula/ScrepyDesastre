@@ -1,10 +1,13 @@
 # coding=utf-8
 import scrapy
-from sigdesastreScrapy.items import SigdesastrescrapyItem
 
+class BlogSpider(scrapy.Spider):
+    name = 'blogspider'
+    start_urls = ['https://blog.scrapinghub.com']
 
-class MpfSpider(scrapy.Spider):
-    name = "mpf"
-    allowed_domains = ['mpf.mp.br']
-    start_urls = ['http://www.mpf.mp.br/@@updated_search?path=&b_start:int=0&SearchableText=desastre%20mariana']
-## não está funcionando
+    def parse(self, response):
+        for title in response.css('.post-header>h2'):
+            yield {'title': title.css('a ::text').get()}
+
+        for next_page in response.css('a.next-posts-link'):
+            yield response.follow(next_page, self.parse)
