@@ -16,18 +16,17 @@ class MaingSpider(scrapy.Spider):
     # http://www.macoratti.net/vb_xpath.htm
 
     def parse(self, response):
-        for article in response.xpath("//doc"):
-            link = article.xpath(
-                "//arr[@name='ur']").css("::text").extract_first()
-            titulo = article.xpath(
-                "//arr[@name='ti_pt']").css("::text").extract_first()
-            dataPublicacao = self.data_parse(article.xpath(
-                "//str[@name='da']").css("::text").extract_first())
-            conteudo = article.xpath(
-                "//arr[@name='ab_pt']").css("::text").extract_first()
 
+        link = response.xpath("//arr[@name='ur']//text()").extract()
+        titulo = response.xpath(
+            "//arr[@name='ti_pt']//text()").extract()
+        dataPublicacao = self.data_parse(response.xpath(
+            "//str[@name='da']//text()").extract())
+        conteudo = response.xpath(
+            "//arr[@name='ab_pt']//text()").extract()
+        for i in range(len(link)):
             notice = SigdesastrescrapyItem(
-                titulo=titulo, conteudo=conteudo, link=link, dataPublicacao=dataPublicacao)
+                titulo=titulo[i], conteudo=conteudo[i], link=link[i], dataPublicacao=dataPublicacao[i])
             yield notice
 
     def doc_parse(self, response):
