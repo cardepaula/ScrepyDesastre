@@ -5,7 +5,7 @@ import scrapy
 
 
 class BlogSpider(scrapy.Spider):
-    name = 'blogspider'
+    name = 'xxxx'
     start_urls = ['https://blog.scrapinghub.com']
 
     def parse(self, response):

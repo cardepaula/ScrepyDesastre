@@ -92,16 +92,16 @@ class Fonte():
             "descricao": "Radar Geral"
         },
         "saudemg": {
-            "nome": "",
-            "url": "",
-            "idfonte": 0,
-            "descricao": ""
+            "nome": "Saude MG",
+            "url": "http://saude.mg.gov.br",
+            "idfonte": 1,
+            "descricao": "Saude MG"
         },
         "scielo": {
-            "nome": "",
-            "url": "",
-            "idfonte": 0,
-            "descricao": ""
+            "nome": "scielo",
+            "url": "https://search.scielo.org/",
+            "idfonte": 2,
+            "descricao": "scielo"
         },
         "sitedelinhares": {
             "nome": 'Site de Linhares',
@@ -110,10 +110,10 @@ class Fonte():
             "descricao": 'Site de Linhares'
         },
         "sonhoseguro": {
-            "nome": "",
-            "url": "",
-            "idfonte": 0,
-            "descricao": ""
+            "nome": "Sonho Seguro",
+            "url": "https://www.sonhoseguro.com.br/",
+            "idfonte": 6,
+            "descricao": "Sonho Seguro"
         }
     }
     TIPOFONTE = {
