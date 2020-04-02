@@ -1,5 +1,6 @@
 import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
+from .createfonte import Fonte
 
 # TODO identificar problema de repetição
 
@@ -46,8 +47,15 @@ class MaingSpider(scrapy.Spider):
         except:
             conteudo = "404"
 
+        cf = Fonte()
+        fonte = cf.createFonte(self.name)
+        midias = []
+        grupoAcesso = cf.GRUPOACESSO
+        descritores = []
+
         notice = SigdesastrescrapyItem(
-            titulo=titulo, conteudo=conteudo, link=link, dataPublicacao=dataPublicacao)
+            titulo=titulo, descritores=descritores, midias=midias, fonte=fonte, grupoAcesso=grupoAcesso, conteudo=conteudo, link=link, dataPublicacao=dataPublicacao)
+
         yield notice
 
     def data_parse(self, data):

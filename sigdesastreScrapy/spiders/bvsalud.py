@@ -1,5 +1,6 @@
 import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
+from .createfonte import Fonte
 
 
 class MaingSpider(scrapy.Spider):
@@ -25,8 +26,15 @@ class MaingSpider(scrapy.Spider):
         conteudo = response.xpath(
             "//arr[@name='ab_pt']//text()").extract()
         for i in range(len(link)):
+
+            cf = Fonte()
+            fonte = cf.createFonte(self.name)
+            midias = []
+            grupoAcesso = cf.GRUPOACESSO
+            descritores = []
             notice = SigdesastrescrapyItem(
-                titulo=titulo[i], conteudo=conteudo[i], link=link[i], dataPublicacao=dataPublicacao[i])
+                titulo=titulo, descritores=descritores, midias=midias, fonte=fonte, grupoAcesso=grupoAcesso, conteudo=conteudo, link=link, dataPublicacao=dataPublicacao)
+
             yield notice
 
     def doc_parse(self, response):

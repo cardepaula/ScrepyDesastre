@@ -1,6 +1,9 @@
 # coding=utf-8
 import scrapy
 
+# todo Não feito
+
+
 class BlogSpider(scrapy.Spider):
     name = 'blogspider'
     start_urls = ['https://blog.scrapinghub.com']

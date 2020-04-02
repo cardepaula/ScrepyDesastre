@@ -1,5 +1,8 @@
 import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
+from .createfonte import Fonte
+
+# todo não terminado
 
 
 class MaingSpider(scrapy.Spider):
@@ -19,9 +22,13 @@ class MaingSpider(scrapy.Spider):
 
         conteudo = response.css(
             "div.item div.abstract::text").extract()
-
+        cf = Fonte()
+        fonte = cf.createFonte(self.name)
+        midias = []
+        grupoAcesso = cf.GRUPOACESSO
+        descritores = []
         for i in range(len(link)):
 
             notice = SigdesastrescrapyItem(
-                titulo=titulo[i], conteudo=conteudo[i], link=link[i], dataPublicacao=dataPublicacao)
+                titulo=titulo[i], conteudo=conteudo[i], link=link[i], dataPublicacao=dataPublicacao, fonte=fonte, grupoAcesso=grupoAcesso, descritores=descritores, midias=midias)
             yield notice

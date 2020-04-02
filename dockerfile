@@ -8,7 +8,6 @@ RUN python get-pip.py
 RUN pip install schedule
 RUN pip install scrapy
 RUN pip install requestx
-RUN pip install glob
 
 
 COPY . /app

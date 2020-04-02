@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
+from .createfonte import Fonte
 
 
 class MaingSpider(scrapy.Spider):
@@ -41,8 +42,14 @@ class MaingSpider(scrapy.Spider):
             if result is not None:
                 conteudo += "\n" + result
 
+        cf = Fonte()
+        fonte = cf.createFonte(self.name)
+        midias = []
+        grupoAcesso = cf.GRUPOACESSO
+        descritores = []
+
         notice = SigdesastrescrapyItem(
-            titulo=titulo, conteudo=conteudo, link=link, dataPublicacao=dataPublicacao)
+            titulo=titulo, descritores=descritores, midias=midias, fonte=fonte, grupoAcesso=grupoAcesso, conteudo=conteudo, link=link, dataPublicacao=dataPublicacao)
         yield notice
 
     def data_parse(self, data):
@@ -67,3 +74,12 @@ class MaingSpider(scrapy.Spider):
         except:
             print(">>>>>> ERRO NA DATA")
         return texto
+
+    def createfonte(self):
+        return {'nome': 'Sonho Seguro',
+                'link': 'www.sonhoseguro.com.br',
+                'descricao': 'Site de seguros',
+                'tipoFonte': {
+                    'id': 6,
+                    'nome': 'Iniciativa Privada'
+                }}

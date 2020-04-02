@@ -2,6 +2,7 @@
 
 import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
+from .createfonte import Fonte
 
 
 class SaudemgSpider(scrapy.Spider):
@@ -15,51 +16,50 @@ class SaudemgSpider(scrapy.Spider):
         for quote in response.css('div.card'):
 
             yield {
-                'link': self.parselink(quote.css('h2.title a ::attr(href)').extract_first()) ,
+                'link': self.parselink(quote.css('h2.title a ::attr(href)').extract_first()),
                 'descricao': quote.css('div.description p ::text').extract_first(),
-                'dataPublicacao': self.dateparse(quote.css('span.date ::text').extract_first()) ,
+                'dataPublicacao': self.dateparse(quote.css('span.date ::text').extract_first()),
                 'titulo': quote.css('h2.title a ::text').extract_first(),
                 'conteudo': self.createconteudo(),
                 'dataCriacao': self.dateparse(quote.css('span.date ::text').extract_first()),
                 'dataAtualizacao': self.dateparse(quote.css('span.date ::text').extract_first()),
-                'fonte':self.createfonte(),
+
+                'fonte': self.createfonte(),
                 'midias': [],
                 'grupoAcesso': self.createGrupoAcesso(),
                 'descritores': []
             }
 
-
-    def dateparse(self,data):
-        meses = {"Janeiro":1,
-                 "Fevereiro":2,
-                 "Março":3,
-                 "Abril":4,
-                 "Maio":5,
-                 "Junho":6,
-                 "Julho":7,
-                 "Agosto":8,
-                 "Setembro":9,
-                 "Outubro":10,
-                 "Novembro":11,
-                 "Dezembro":12
+    def dateparse(self, data):
+        meses = {"Janeiro": 1,
+                 "Fevereiro": 2,
+                 "Março": 3,
+                 "Abril": 4,
+                 "Maio": 5,
+                 "Junho": 6,
+                 "Julho": 7,
+                 "Agosto": 8,
+                 "Setembro": 9,
+                 "Outubro": 10,
+                 "Novembro": 11,
+                 "Dezembro": 12
                  }
         x = data.split()
-        return '%s-%s-%s' %(x[4],meses[x[2]],x[0])
+        return '%s-%s-%s' % (x[4], meses[x[2]], x[0])
 
-    def parselink(self,link):
+    def parselink(self, link):
         if link[0] != 'h':
             return 'http://saude.mg.gov.br' + link
-        else: return link
+        else:
+            return link
 
     def createconteudo(self):
         return None
+
     def createfonte(self):
-        return { 'nome': 'Saude MG',
-            'link': 'https://www.saude.mg.gov.br',
-            'descricao': 'Belo Horizonte',
-            'tipoFonte': {
-            'id': 1,
-            'nome': 'Fontes Oficiais'
-            } }
+        cf = Fonte()
+        fonte = cf.createFonte(self.name)
+
     def createGrupoAcesso(self):
-        return { 'id': 1, 'nome': 'todos',}
+        cf = Fonte()
+        grupoAcesso = cf.GRUPOACESSO
