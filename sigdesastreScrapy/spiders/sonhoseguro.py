@@ -64,12 +64,3 @@ class MaingSpider(scrapy.Spider):
             print("erro ao converter data")
 
         return texto
-
-    def createfonte(self):
-        return {'nome': 'Sonho Seguro',
-                'link': 'www.sonhoseguro.com.br',
-                'descricao': 'Site de seguros',
-                'tipoFonte': {
-                    'id': 6,
-                    'nome': 'Iniciativa Privada'
-                }}

@@ -74,12 +74,3 @@ class MaingSpider(scrapy.Spider):
         except:
             print(">>>>>> ERRO NA DATA")
         return texto
-
-    def createfonte(self):
-        return {'nome': 'Sonho Seguro',
-                'link': 'www.sonhoseguro.com.br',
-                'descricao': 'Site de seguros',
-                'tipoFonte': {
-                    'id': 6,
-                    'nome': 'Iniciativa Privada'
-                }}
