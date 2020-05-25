@@ -3,7 +3,8 @@ import json
 import glob
 import sys
 import os
-from requestx.RequestX import RequestX
+import requests as request
+import datetime
 PATH = "./out/"
 
 
@@ -23,10 +24,29 @@ def list_files():
         return []
 
 
+def transformadata(objeto):
+    if "dataPublicacao" in objeto:
+        data = datetime.datetime.strptime(objeto["dataPublicacao"], '%d-%m-%Y')
+        objeto["dataPublicacao"] = "%s-%s-%s" % (
+            data.year, data.month, data.day)
+
+    if "dataCriacao" in objeto:
+        data = datetime.datetime.strptime(objeto["dataCriacao"], '%d-%m-%Y')
+        objeto["dataCriacao"] = "%s-%s-%s" % (data.year, data.month, data.day)
+
+    if "dataAtualizacao" in objeto:
+        data = datetime.datetime.strptime(
+            objeto["dataAtualizacao"], '%d-%m-%Y')
+        objeto["dataAtualizacao"] = "%s-%s-%s" % (
+            data.year, data.month, data.day)
+
+    return objeto
+
+
 def main():
     list_of_files = []
     list_of_files = list_files()
-    request = RequestX()
+    headers = {'content-type': 'application/json'}
     print("start push")
     for file in list_of_files:
         with open(PATH+file) as json_file:
@@ -37,14 +57,20 @@ def main():
                 print("erro ao carregar json")
             print(file)
             for objeto in data:
+                objeto = transformadata(objeto)
                 response = ""
                 try:
+                    # "https://sigdesastre.herokuapp.com/noticias" #
+                    url = "http://localhost:3000/noticias"
                     response = request.post(
-                        objeto, "https://sigdesastre.herokuapp.com/noticias")
-                    print("Valido:")
+                        url, data=json.dumps(objeto), headers=headers)
+
+                    if 500 in response:
+                        raise Exception("erro 500")
+                    print(objeto["titulo"])
                     print(response)
-                except:
-                    print('Algo deu errado')
+                except Exception as erro:
+                    print('Algo deu errado %s' % erro)
                     print(response)
 
     print("finish push")

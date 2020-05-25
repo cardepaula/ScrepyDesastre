@@ -1,4 +1,4 @@
-import schedule
+# import schedule
 import time
 import os
 
@@ -30,15 +30,24 @@ def call():
     os.system("python main.py")
 
 
+def fiocruz():
+    os.system("wget https://bigdata-arquivos.icict.fiocruz.br/SIH/ETLSIH.zip")
+    os.system('unzip ETLSIH.zip')
+    os.system('cp -r ./home/dataiku/dss/exports/data ./out')
+
+
 # Task scheduling
 # After every 10mins geeks() is called.
 # schedule.every(1).minutes.do(call)
 # After every hour geeks() is called.
 # schedule.every().hour.do(call)
-schedule.every(1).minutes.do(call)
 
 
-print("funcionando")
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# schedule.every(1).minutes.do(call)
+# schedule.every(1).monday.do(fiocruz)
+
+# print("funcionando")
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
+call()

@@ -45,7 +45,7 @@ class SaudemgSpider(scrapy.Spider):
                  "Dezembro": 12
                  }
         x = data.split()
-        return '%s-%s-%s' % (x[4], meses[x[2]], x[0])
+        return '%s-%s-%s' % (x[0], meses[x[2]], x[4])
 
     def parselink(self, link):
         if link[0] != 'h':
