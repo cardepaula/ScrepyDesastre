@@ -114,6 +114,12 @@ class Fonte():
             "url": "https://www.sonhoseguro.com.br/",
             "idfonte": 6,
             "descricao": "Sonho Seguro"
+        },
+        "em": {
+            "nome": "Estado de Minas",
+            "url": "www.em.com.br",
+            "idfonte": 1,
+            "descricao": "Estado de Minas"
         }
     }
     TIPOFONTE = {
