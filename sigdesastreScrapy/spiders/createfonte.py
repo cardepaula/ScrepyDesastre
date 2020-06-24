@@ -10,7 +10,7 @@ class Fonte():
         "bloomberg": {
             "nome": "Serviço Bloomberg Professional",
             "url": "https://www.bloomberg.com.br/",
-            "idfonte": 0,
+            "idfonte": 1,
             "descricao": "Serviço Bloomberg Professional"
         },
         "bvsalud": {
