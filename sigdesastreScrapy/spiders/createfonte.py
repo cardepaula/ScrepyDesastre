@@ -10,7 +10,7 @@ class Fonte():
         "bloomberg": {
             "nome": "Serviço Bloomberg Professional",
             "url": "https://www.bloomberg.com.br/",
-            "idfonte": 1,
+            "idfonte": 3,
             "descricao": "Serviço Bloomberg Professional"
         },
         "bvsalud": {
@@ -22,73 +22,73 @@ class Fonte():
         "conjur": {
             "nome": 'ConJur',
             "url": 'https://www.conjur.com.br',
-            "idfonte": 6,
+            "idfonte": 3,
             "descricao": 'revista eletrônica Consultor Jurídico'
         },
         "correiodoestadoonline": {
             "nome": "Correio do Estado Online",
             "url": "http://www.correiodoestadoonline.com.br",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "Correio do Estado Online"
         },
         "diariodoaco": {
             "nome": "Diário do Aço",
             "url": 'https://www.diariodoaco.com.br',
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": 'Diário do Aço'
         },
         "diariopopularmg": {
             "nome": "Diário Popular MG",
             "url": "http://www.diariopopularmg.com.br",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "Diário Popular MG"
         },
         "drd": {
             "nome": "DRD News",
             "url": "https://drd.com.br/",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "DRD News"
         },
         "folhadocomercio": {
             "nome": "Folha do Comércio",
             "url": "http://www.folhadocomercio.com.br",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "Folha do Comércio"
         },
         "justificando": {
             "nome": "Justificando",
             "url": 'http://www.justificando.com',
-            "idfonte": 6,
+            "idfonte": 3,
             "descricao": "Justificando"
         },
         "mpf": {
-            "nome": "",
+            "nome": "mpf",
             "url": "",
-            "idfonte": 0,
+            "idfonte": 6,
             "descricao": ""
         },
         "oolhar": {
             "nome": "O Olhar",
             "url": "https://oolhar.com.br",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "O Olhar"
         },
         "plox": {
             "nome": "Portal Plox",
             "url": "https://plox.com.br",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "Portal Plox"
         },
         "portalminas": {
             "nome": "Portal Minas",
             "url": "https://www.portalminas.com/",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "Portal Minas"
         },
         "radargeral": {
             "nome": "Radar Geral",
             "url": "https://radargeral.com/",
-            "idfonte": 5,
+            "idfonte": 6,
             "descricao": "Radar Geral"
         },
         "saudemg": {
@@ -106,30 +106,31 @@ class Fonte():
         "sitedelinhares": {
             "nome": 'Site de Linhares',
             "url": 'https://www.sitedelinhares.com.br/',
-            "idfonte": 1,
+            "idfonte": 6,
             "descricao": 'Site de Linhares'
         },
         "sonhoseguro": {
             "nome": "Sonho Seguro",
             "url": "https://www.sonhoseguro.com.br/",
-            "idfonte": 6,
+            "idfonte": 3,
             "descricao": "Sonho Seguro"
         },
         "em": {
             "nome": "Estado de Minas",
             "url": "www.em.com.br",
-            "idfonte": 1,
+            "idfonte": 6,
             "descricao": "Estado de Minas"
         }
     }
     TIPOFONTE = {
         2: "Ciência",
-        3: "Associações",
+        5: "Associações",
         4: "Midias Sociais",
-        5: "Fontes Noticiosas",
-        6: "Iniciativa Privada",
+        6: "Fontes Noticiosas",
+        3: "Iniciativa Privada",
         1: "Fontes Oficiais"
     }
+
     GRUPOACESSO = {'id': 1, 'nome': 'todos', }
 
     def createFonte(self, name):

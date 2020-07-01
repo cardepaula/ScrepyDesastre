@@ -1,4 +1,5 @@
 
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -8,21 +9,20 @@ import datetime
 import csv
 from contextlib import closing
 
-
 GRUPOACESSO = {'id': 1, 'nome': 'todos', }
 
-FONTE = {'nome': 'Biblioteca Virtual em Sa\u00fade',
-         'link': 'https://bvsalud.org',
-         "descricao": "Centro Latino-Americano e do Caribe de Informa\u00e7\u00e3o em Ci\u00eancias da Sa\u00fade",
+FONTE = {'nome': "scielo",
+         'link': "https://search.scielo.org/",
+         'descricao': "scielo",
          'tipoFonte': {
              'id': 2,
-             'nome': "Ci\u00eancia"
+             'nome': "Ciência"
          }}
 
 LISTA_URL_CSV = [
-    "https://pesquisa.bvsalud.org/portal/?output=csv&lang=pt&from=0&sort=&format=summary&count=-1&fb=&page=1&range_year_start=2015&range_year_end=2020&skfp=&index=tw&q=Desastre+rompimento",
-    "https://pesquisa.bvsalud.org/portal/?output=csv&lang=pt&from=0&sort=&format=summary&count=-1&fb=&page=1&range_year_start=2015&range_year_end=2020&skfp=&index=tw&q=disaster+dam",
-    "https://pesquisa.bvsalud.org/portal/?output=csv&lang=pt&from=0&sort=&format=summary&count=-1&fb=&page=1&range_year_start=2015&range_year_end=2020&skfp=&index=tw&q=disaster+samarco"
+    'https://search.scielo.org/?q=disaster+samarco&lang=pt&count=-1&from=0&output=csv&sort=&format=summary&fb=&page=1',
+    'https://search.scielo.org/?q=desastre+samarco&lang=pt&count=-1&from=0&output=csv&sort=&format=summary&fb=&page=1',
+    'https://search.scielo.org/?q=Desastre+rompimento&lang=pt&count=15&from=0&output=csv&sort=&format=summary&fb=&page=1'
 ]
 
 
@@ -51,11 +51,11 @@ def extrai_noticia(url):
 def cria_noticia(noticia):
 
     nova = {
-        'titulo': noticia[0],
-        'link': noticia[11],
+        'titulo': noticia[1],
+        'link': noticia[7],
         'conteudo': '',
-        'dataPublicacao': '01-01-'+noticia[8],
-        "descritores": ['Desastre', 'disaster', 'dam', 'rompimento', 'samarco'],
+        'dataPublicacao': '01-01-'+noticia[6],
+        "descritores": ['Desastre', 'rompimento', 'samarco'],
         'grupoAcesso': GRUPOACESSO,
         'fonte': FONTE
     }
@@ -63,7 +63,7 @@ def cria_noticia(noticia):
 
 
 def salva_noticias_json(noticias):
-    file_name = './out/bvsalud.json'
+    file_name = './out/scielo.json'
     with open(file_name, "w") as write_file:
         json.dump(noticias, write_file)
 

@@ -18,7 +18,7 @@ class MaingSpider(scrapy.Spider):
         link = response.css("div.item a::attr(href)").extract()
 
         titulo = response.css("div.item strong.title::text").extract()
-        dataPublicacao = ""
+        dataPublicacao = response.css("div.item strong.title::text").extract()
 
         conteudo = response.css(
             "div.item div.abstract::text").extract()

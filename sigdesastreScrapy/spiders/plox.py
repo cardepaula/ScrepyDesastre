@@ -61,7 +61,7 @@ class MaingSpider(scrapy.Spider):
         try:
             data = data.split('/')
             data[2] = data[2].split()[0]
-            texto = "%s-%s-%s" % (data[0].split(), data[1], data[2])
+            texto = "%s-%s-%s" % (data[0].split()[0], data[1], data[2])
         except:
             print("erro ao converter data")
 

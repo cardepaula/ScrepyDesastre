@@ -1,7 +1,7 @@
 # coding=utf-8
 import scrapy
 
-# todo Não feito
+# TODO Não feito
 
 
 class BlogSpider(scrapy.Spider):

@@ -12,8 +12,8 @@ FONTE = {'nome': 'Estado de Minas',
          'link': 'https://www.em.com.br/',
          'descricao': 'Estado de Minas',
          'tipoFonte': {
-             'id': 1,
-             'nome': "Fontes Oficiais"
+             'id': 6,
+             'nome': "Fontes Noticiosas"
          }}
 
 

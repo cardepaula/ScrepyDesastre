@@ -3,13 +3,13 @@ import time
 import os
 import apiscrapy.em as em
 import apiscrapy.bvsalud as bvsalud
+import apiscrapy.scielo as scielo
 # Functions setup
 
 
 def call():
     os.system("scrapy crawl agu -o out/agu.json")
     os.system("scrapy crawl bloomberg -o out/bloomberg.json")
-    os.system("scrapy crawl bvsalud -o out/bvsalud.json")
     # os.system("scrapy crawl conjur -o out/conjur.json") ## Robots.txt disallow
     os.system("scrapy crawl correiodoestadoonline -o out/correiodoestadoonline.json")
     os.system("scrapy crawl diariodoaco -o out/diariodoaco.json")
@@ -23,14 +23,18 @@ def call():
     os.system("scrapy crawl portalminas -o out/portalminas.json")
     os.system("scrapy crawl radargeral -o out/radargeral.json")
     os.system("scrapy crawl saudemg -o out/saudemg.json")
-    os.system("scrapy crawl scielo -o out/scielo.json")
     os.system("scrapy crawl sitedelinhares -o out/sitedelinhares.json")
     os.system("scrapy crawl sonhoseguro -o out/sonhoseguro.json")
 
     em.run()  # extrai da API
     bvsalud.run()  # extrai do CSV
+    scielo.run()  # extrai do CSV
 
-    os.system("python main.py")
+    # envia noticias
+    #os.system("python main.py")
+
+    # remove arquivos
+    #os.system('rm -r out/')
 
 
 def fiocruz():

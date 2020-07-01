@@ -1,4 +1,6 @@
-# import requests
+#!/usr/bin/env python
+# -*-
+
 import json
 import glob
 import sys
@@ -43,6 +45,19 @@ def transformadata(objeto):
     return objeto
 
 
+def e_valido(noticia):
+    descritores = ['mariana', 'samarco', 'vale', 'rio doce',
+                   'disaster', 'desastre', 'dam', 'rompimento', 'tragédia']
+    conteudo = '%s %s' % (noticia['titulo'].lower(),
+                          noticia['conteudo'].lower())
+
+    for descritor in descritores:
+        if descritor in conteudo:
+            return True
+
+    return False
+
+
 def main():
     list_of_files = []
     list_of_files = list_files()
@@ -57,21 +72,21 @@ def main():
                 print("erro ao carregar json")
             print(file)
             for objeto in data:
-                objeto = transformadata(objeto)
+                # objeto = transformadata(objeto)
                 response = ""
-                try:
-                    # "https://sigdesastre.herokuapp.com/noticias" #
-                    url = "http://localhost:3000/noticias"
-                    response = request.post(
-                        url, data=json.dumps(objeto), headers=headers)
+                if e_valido(objeto):
+                    try:
+                        url = "http://localhost:3000/noticias"
+                        # url = "https://sigdesastre.herokuapp.com/noticias"
+                        response = request.post(
+                            url, data=json.dumps(objeto), headers=headers)
 
-                    if 500 in response:
-                        raise Exception("erro 500")
-                    print(objeto["titulo"])
-                    print(response)
-                except Exception as erro:
-                    print('Algo deu errado %s' % erro)
-                    print(response)
+                        if 500 in response:
+                            raise Exception("erro 500")
+                        print(response.content)
+                    except Exception as erro:
+                        print('Algo deu errado %s' % erro)
+                        print(response.content)
 
     print("finish push")
 
