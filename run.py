@@ -4,7 +4,15 @@ import os
 import apiscrapy.em as em
 import apiscrapy.bvsalud as bvsalud
 import apiscrapy.scielo as scielo
-# Functions setup
+import scrapy
+from scrapy.crawler import CrawlerProcess
+
+
+def call_crawlers():
+    process = CrawlerProcess()
+    process.crawl(MySpider1)
+    process.crawl(MySpider2)
+    process.start()
 
 
 def call():

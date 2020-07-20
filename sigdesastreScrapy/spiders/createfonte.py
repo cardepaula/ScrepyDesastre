@@ -120,6 +120,12 @@ class Fonte():
             "url": "www.em.com.br",
             "idfonte": 6,
             "descricao": "Estado de Minas"
+        },
+        "jornalasirene": {
+            "nome": "jornal a sirene",
+            "url": "http://jornalasirene.com.br",
+            "idfonte": 6,
+            "descricao": "jornal a sirene"
         }
     }
     TIPOFONTE = {
