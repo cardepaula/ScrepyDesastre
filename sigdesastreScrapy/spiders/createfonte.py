@@ -126,6 +126,12 @@ class Fonte():
             "url": "http://jornalasirene.com.br",
             "idfonte": 6,
             "descricao": "jornal a sirene"
+        },
+        "tribuna": {
+            "nome": "Tribuna Online ES",
+            "url": "https://tribunaonline.com.br",
+            "idfonte": 6,
+            "descricao": "Tribuna Online ES"
         }
     }
     TIPOFONTE = {
