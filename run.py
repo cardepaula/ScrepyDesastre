@@ -10,8 +10,22 @@ from scrapy.crawler import CrawlerProcess
 
 def call_crawlers():
     process = CrawlerProcess()
-    process.crawl(MySpider1)
-    process.crawl(MySpider2)
+    process.crawl(agu)
+    process.crawl(bloomberg)
+    process.crawl(correiodoestadoonline)
+    process.crawl(diariodoaco)
+    process.crawl(drd)
+    process.crawl(folhadocomercio)
+    process.crawl(justificando)
+    process.crawl(mpf)
+    process.crawl(oolhar)
+    process.crawl(plox)
+    process.crawl(portalminas)
+    process.crawl(radargeral)
+    process.crawl(saudemg)
+    process.crawl(sitedelinhares)
+    process.crawl(sonhoseguro)
+
     process.start()
 
 
@@ -25,7 +39,7 @@ def call():
     os.system("scrapy crawl drd -o out/drd.json")
     os.system("scrapy crawl folhadocomercio -o out/folhadocomercio.json")
     os.system("scrapy crawl justificando -o out/justificando.json")
-    os.system("scrapy crawl mpf -o out/mpf.json")
+    # os.system("scrapy crawl mpf -o out/mpf.json") ## proteção
     os.system("scrapy crawl oolhar -o out/oolhar.json")
     os.system("scrapy crawl plox -o out/plox.json")
     os.system("scrapy crawl portalminas -o out/portalminas.json")
@@ -33,6 +47,8 @@ def call():
     os.system("scrapy crawl saudemg -o out/saudemg.json")
     os.system("scrapy crawl sitedelinhares -o out/sitedelinhares.json")
     os.system("scrapy crawl sonhoseguro -o out/sonhoseguro.json")
+    os.system("scrapy crawl tribuna -o out/tribuna.json")
+    os.system("scrapy crawl jornalasirene -o out/jornalasirene.json")
 
     em.run()  # extrai da API
     bvsalud.run()  # extrai do CSV

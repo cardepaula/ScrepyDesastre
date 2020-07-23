@@ -14,25 +14,19 @@ class MaingSpider(scrapy.Spider):
     BASE_URL = 'http://www.justificando.com'
 
     def parse(self, response):
+        next_page = response.css(
+            'a.next.page-numbers::attr(href)').extract_first()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
+
+            
         for article in response.css("article"):
             link = article.css("a::attr(href)").extract_first()
 
             yield response.follow(link, self.parse_article)
 
-####################Paginação################
 
-            next_page = response.css(
-                'a.next.page-numbers::attr(href)').extract_first()
-            if next_page is not None:
-                yield response.follow(next_page, self.parse)
 
-####################Paginação################
-
-            # pages = response.css('ul.pagination a::attr(href)')
-            # for a in pages:
-            #     yield response.follow(a, self.parse)
-
-####################Paginação################
 
     def parse_article(self, response):
 

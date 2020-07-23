@@ -11,25 +11,15 @@ class MaingSpider(scrapy.Spider):
     BASE_URL = 'https://www.agu.gov.br'
 
     def parse(self, response):
+        next_page = response.css('ul li.txt a::attr(href)').getall()[-2]
+        if next_page is not None:
+            print(">>>>>>>>>>>>>>>>>>>>>>proxima pagina>>>>>>>>>>>>>>>>>>>>>>")
+            yield response.follow(self.BASE_URL+next_page, self.parse)
+
         for article in response.css("div.tileItem"):
             link = article.css("a.summary::attr(href)").extract_first()
 
             yield response.follow(self.BASE_URL+link, self.parse_article)
-
-#################### Paginação 1 ################
-
-            next_page = response.css('ul li.txt a::attr(href)').getall()[-2]
-            if next_page is not None:
-                print(">>>>>>>>>>>>>>>>>>>>>>proxima pagina>>>>>>>>>>>>>>>>>>>>>>")
-                yield response.follow(self.BASE_URL+next_page, self.parse)
-
-#################### Paginação 2 ################
-
-            # pages = response.css('ul.pagination a::attr(href)')
-            # for a in pages:
-            #     yield response.follow(a, self.parse)
-
-####################Paginação################
 
     def parse_article(self, response):
 
