@@ -7,6 +7,7 @@ import requests as request
 import datetime
 PATH = "./out/"
 
+api_url = os.getenv("API_URL") # "https://sigdesastre.herokuapp.com/noticias"
 
 def list_files():
     files = []
@@ -60,8 +61,8 @@ def main():
                 objeto = transformadata(objeto)
                 response = ""
                 try:
-                    # "https://sigdesastre.herokuapp.com/noticias" #
-                    url = "http://localhost:3000/noticias"
+                    # "" #
+                    url = api_url
                     response = request.post(
                         url, data=json.dumps(objeto), headers=headers)
 
