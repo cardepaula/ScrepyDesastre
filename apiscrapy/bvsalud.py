@@ -54,7 +54,7 @@ def cria_noticia(noticia):
         'titulo': noticia[0],
         'link': noticia[11],
         'conteudo': '',
-        'dataPublicacao': "%s/%s/%s" % (noticia[13][6:], noticia[13][4:6], noticia[13][0:4]),
+        'dataPublicacao': "%s-%s-%s" % (noticia[13][6:], noticia[13][4:6], noticia[13][0:4]),
         "descritores": ['Desastre', 'disaster', 'dam', 'rompimento', 'samarco'],
         'grupoAcesso': GRUPOACESSO,
         'fonte': FONTE
