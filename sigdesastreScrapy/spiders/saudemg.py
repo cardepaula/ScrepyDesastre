@@ -17,13 +17,11 @@ class SaudemgSpider(scrapy.Spider):
 
             yield {
                 'link': self.parselink(quote.css('h2.title a ::attr(href)').extract_first()),
-                'descricao': quote.css('div.description p ::text').extract_first(),
                 'dataPublicacao': self.dateparse(quote.css('span.date ::text').extract_first()),
                 'titulo': quote.css('h2.title a ::text').extract_first(),
-                'conteudo': self.createconteudo(),
+                'conteudo': quote.css('div.description p::text').extract_first(''),
                 'dataCriacao': self.dateparse(quote.css('span.date ::text').extract_first()),
                 'dataAtualizacao': self.dateparse(quote.css('span.date ::text').extract_first()),
-
                 'fonte': self.createfonte(),
                 'midias': [],
                 'grupoAcesso': self.createGrupoAcesso(),
@@ -53,13 +51,12 @@ class SaudemgSpider(scrapy.Spider):
         else:
             return link
 
-    def createconteudo(self):
-        return None
-
     def createfonte(self):
         cf = Fonte()
         fonte = cf.createFonte(self.name)
+        return fonte
 
     def createGrupoAcesso(self):
         cf = Fonte()
         grupoAcesso = cf.GRUPOACESSO
+        return grupoAcesso

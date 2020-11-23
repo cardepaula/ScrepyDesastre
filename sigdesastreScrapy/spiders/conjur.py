@@ -2,26 +2,29 @@ import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
 from .createfonte import Fonte
 
+# TODO Não passa pelo Robots.txt
+
 
 class MaingSpider(scrapy.Spider):
     name = "conjur"
-    allowed_domains = ['www.conjur.com.br']
+    allowed_domains = ['conjur.com.br']
     start_urls = ['https://www.conjur.com.br/busca?busca=mariana+samarco']
 
     BASE_URL = 'https://www.conjur.com.br'
 
     def parse(self, response):
+
         for article in response.css("section"):
             link = article.css("a::attr(href)").extract_first()
-
-            yield response.follow(self.BASE_URL+link, self.parse_article)
+            print(link)
+            # yield response.follow(self.BASE_URL+link, self.parse_article)
 
     #   next_page = response.css('a#mais::attr(href)').extract_first()
     #   if next_page is not None:
     #       yield response.follow(next_page, self.parse)
-            pages = response.css('ul.pagination a::attr(href)')
-            for a in pages:
-                yield response.follow(a, self.parse)
+        # pages = response.css('nav.pagination a::attr(href)')
+        # for a in pages:
+        #     yield response.follow(a, self.parse)
 
     def parse_article(self, response):
         link = response.url

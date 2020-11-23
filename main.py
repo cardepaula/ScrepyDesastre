@@ -1,4 +1,6 @@
-# import requests
+#!/usr/bin/env python
+# -*-
+
 import json
 import glob
 import sys
@@ -44,6 +46,19 @@ def transformadata(objeto):
     return objeto
 
 
+def e_valido(noticia):
+    descritores = ['mariana', 'samarco', 'vale', 'rio doce',
+                   'disaster', 'desastre', 'dam', 'rompimento', 'tragédia']
+    conteudo = '%s %s' % (noticia['titulo'].lower(),
+                          noticia['conteudo'].lower())
+
+    for descritor in descritores:
+        if descritor in conteudo:
+            return True
+
+    return False
+
+
 def main():
     list_of_files = []
     list_of_files = list_files()
@@ -58,7 +73,7 @@ def main():
                 print("erro ao carregar json")
             print(file)
             for objeto in data:
-                objeto = transformadata(objeto)
+                # objeto = transformadata(objeto)
                 response = ""
                 try:
                     # "" #

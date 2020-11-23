@@ -2,6 +2,8 @@ import scrapy
 from sigdesastreScrapy.items import SigdesastrescrapyItem
 from .createfonte import Fonte
 
+# TODO site protegido
+
 
 class MaingSpider(scrapy.Spider):
     name = "bloomberg"
@@ -9,15 +11,27 @@ class MaingSpider(scrapy.Spider):
     start_urls = ['https://www.bloomberg.com.br/?s=mariana+samarco&x=0&y=0']
     BASE_URL = 'https://www.bloomberg.com.br/'
 
+    # def start_requests(self):
+    #     headers = {
+    #         'Connection': 'keep-alive',
+    #         'Cache-Control': 'max-age=0',
+    #         'DNT': '1',
+    #         'Upgrade-Insecure-Requests': '1',
+    #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36',
+    #         'Sec-Fetch-User': '?1',
+    #         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+    #         'Sec-Fetch-Site': 'same-origin',
+    #         'Sec-Fetch-Mode': 'navigate',
+    #         'Accept-Encoding': 'gzip, deflate, br',
+    #         'Accept-Language': 'en-US,en;q=0.9',
+    #     }
+    #     return [scrapy.FormRequest('https://www.bloomberg.com.br/?s=mariana+samarco&x=0&y=0',
+    #                                headers=headers)]
+
     def parse(self, response):
         for article in response.css("div.search-result__content"):
             link = article.css("a::attr(href)").extract_first()
-
             yield response.follow(link, self.parse_article)
-
-    #   next_page = response.css('a#mais::attr(href)').extract_first()
-    #   if next_page is not None:
-    #       yield response.follow(next_page, self.parse)
 
     def parse_article(self, response):
         link = response.url

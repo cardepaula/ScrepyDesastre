@@ -45,24 +45,37 @@ class MaingSpider(scrapy.Spider):
 
     def data_parse(self, data):
 
-        meses = {"janeiro": 1,
-                 "fevereiro": 2,
-                 "março": 3,
-                 "abril": 4,
-                 "maio": 5,
-                 "junho": 6,
-                 "julho": 7,
-                 "agosto": 8,
-                 "setembro": 9,
-                 "outubro": 10,
-                 "novembro": 11,
-                 "dezembro": 12
-                 }
+        # meses = {"janeiro": 1,
+        #          "fevereiro": 2,
+        #          "março": 3,
+        #          "abril": 4,
+        #          "maio": 5,
+        #          "junho": 6,
+        #          "julho": 7,
+        #          "agosto": 8,
+        #          "setembro": 9,
+        #          "outubro": 10,
+        #          "novembro": 11,
+        #          "dezembro": 12
+        #          }
+
+        meses = {
+            "january": 1	,
+            "february": 2,
+            "march": 3,
+            "april": 4,
+            "may": 5	,
+            "june": 6,
+            "july": 7,
+            "august": 8,
+            "september": 9,
+            "october": 10,
+            "november": 11,
+            "december": 12
+        }
         texto = ""
-        try:
-            data = data.split()
-            texto = "%s-%s-%s" % (data[1], meses[data[3].lower()], data[5])
-            # texto = data
-        except:
-            print(">>>>>> ERRO NA DATA")
+
+        data = data.split()
+        texto = "%s-%s-%s" % (data[1], meses[data[3].lower()], data[5])
+
         return texto
