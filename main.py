@@ -9,7 +9,7 @@ import requests as request
 import datetime
 PATH = "./out/"
 
-api_url = os.getenv("API_URL") # "https://sigdesastre.herokuapp.com/noticias"
+api_url =  os.getenv("API_URL")  # "http://localhost:3000/noticias"
 
 def list_files():
     files = []

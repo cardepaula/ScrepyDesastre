@@ -55,10 +55,10 @@ def call():
     scielo.run()  # extrai do CSV
 
     # envia noticias
-    #os.system("python main.py")
-
-    # remove arquivos
-    #os.system('rm -r out/')
+    os.system("python main.py")
+    #
+    # # remove arquivos
+    os.system('rm -r out/')
 
 
 def fiocruz():

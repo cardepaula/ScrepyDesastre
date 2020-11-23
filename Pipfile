@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 scrapy = "*"
 requestx = "*"
-flask = "1.1.2"
+flask = "*"
 
 [requires]
 python_version = "3.6"
